@@ -6,8 +6,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
+//Notice that this class extends JPanel
 public class PetSurvey extends JPanel{
 
+    //Global variables for GUI components
     private JCheckBox catCheckBox;
     private JCheckBox fishCheckBox;
     private JCheckBox dogCheckBox;
@@ -18,10 +20,10 @@ public class PetSurvey extends JPanel{
 
     private boolean fish, cat, dog;
 
-
+    //Configure your GUI components in the constructor
     PetSurvey() {
-        //Set up GUI components here
 
+        //Set up GUI components here
         instructionsLabel = new JLabel("Select the pets you have");
 
         catCheckBox = new JCheckBox("Cat");
@@ -32,6 +34,7 @@ public class PetSurvey extends JPanel{
 
         quitButton = new JButton("Quit");
 
+        //and then add the components to your GUI
         add(instructionsLabel);
         add(catCheckBox);
         add(dogCheckBox);
@@ -40,6 +43,7 @@ public class PetSurvey extends JPanel{
         add(surveyResultsLabel);
         add(quitButton);
 
+        //And, add listeners to all components that need to respond to user events
         catCheckBox.addItemListener(new ItemListener() {
             @Override
             public void itemStateChanged(ItemEvent e) {
@@ -66,16 +70,17 @@ public class PetSurvey extends JPanel{
         quitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
+                //Show 'are you sure' dialog box
+
                 int quit = JOptionPane.showConfirmDialog(PetSurvey.this,
                         "Are you sure you want to quit?", "Quit?",
                         JOptionPane.OK_CANCEL_OPTION);
 
+                //Check which option user selected, quit if user clicked ok
                 if (quit == JOptionPane.OK_OPTION) {
                     System.exit(0);
                 }
-
-
-
             }
         });
 
@@ -103,12 +108,18 @@ public class PetSurvey extends JPanel{
 
     public static void main(String[] args) {
 
+        //Create a frame - the GUI window
         JFrame petSurveyFrame = new JFrame("Pet survey");
-        PetSurvey surveyGUI = new PetSurvey();
+        //configure the JFrame / GUI window
         petSurveyFrame.setSize(350, 200);
-        petSurveyFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        petSurveyFrame.add(surveyGUI);
         petSurveyFrame.setVisible(true);
+        petSurveyFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+
+        //Create an object from this class - it's a JPanel,  which is a GUI component
+        PetSurvey surveyGUI = new PetSurvey();
+
+        //And add it to the JFrame
+        petSurveyFrame.add(surveyGUI);
 
     }
 }
